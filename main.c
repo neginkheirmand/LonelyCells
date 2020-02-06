@@ -352,13 +352,13 @@ void map_editor(int ***map_bin, int* size_game,int* num_boost_blocks, int* num_f
     *num_forbiden_blocks=0;
 
     printf("the states of a block are:\n");
-    SetConsoleTextAttribute(hConsole, 1);
+    SetConsoleTextAttribute(hConsole, 14);
     printf("1)ENERGY\n");
     SetConsoleTextAttribute(hConsole, 2);
     printf("2)MITOSIS\n");
-    SetConsoleTextAttribute(hConsole, 3);
+    SetConsoleTextAttribute(hConsole, 12);
     printf("3)FORBIDDEN\n");
-    SetConsoleTextAttribute(hConsole, 4);
+    SetConsoleTextAttribute(hConsole, 15);
     printf("4)NORMAL\n");
     SetConsoleTextAttribute(hConsole, 7);
     
@@ -462,18 +462,18 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
     struct cell* temp=*head_1;
     int size_name;
     fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
-    char* name1=malloc(sizeof(char)*size_name+2);
-    fgets(name1, size_name+2, save_file_cells);
-    name1[size_name+1]='\0';
+    char* name1=malloc(sizeof(char)*size_name+3);
+    fgets(name1, size_name+3, save_file_cells);
+    name1[size_name]='\0';
     temp->name=name1;
     temp->index=1;
     for(int i=2; i<=num_cells1; i++){
         temp->next_cell=mitosis();
         temp=temp->next_cell;
         fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
-        name1=malloc(sizeof(char)*size_name+2);
-        fgets(name1,size_name+2, save_file_cells);
-        name1[size_name+1]='\0';
+        name1=malloc(sizeof(char)*size_name+3);
+        fgets(name1,size_name+3, save_file_cells);
+        name1[size_name]='\0';
         temp->name=name1;
         temp->index=i;
     }
@@ -484,18 +484,18 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
         *head_2=mitosis();
         temp=*head_2;
         fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
-        name1=malloc(sizeof(char)*size_name+2);
-        fgets(name1, size_name+2, save_file_cells);
-        name1[size_name+1]='\0';
+        name1=malloc(sizeof(char)*size_name+3);
+        fgets(name1, size_name+3, save_file_cells);
+        name1[size_name]='\0';
         temp->name=name1;
         temp->index=1;
         for(int i=2; i<=num_cells1; i++){
             temp->next_cell=mitosis();
             temp=temp->next_cell;
-            name1=malloc(sizeof(char)*size_name+2);
+            name1=malloc(sizeof(char)*size_name+3);
             fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
-            fgets(name1, size_name+2, save_file_cells);
-            name1[size_name+1]='\0';
+            fgets(name1, size_name+3, save_file_cells);
+            name1[size_name]='\0';
             temp->name=name1;
             temp->index=i;
             temp=temp->next_cell;
@@ -544,18 +544,6 @@ void Save(int num_players, struct cell* head_of_list1, struct cell* head_of_list
         printf("cannot save it\n");
         return;
     }
-    // printf("Do you want to change the map or just save it as it is?\n");
-    // printf("1)Yes. I would like to change it.\n");
-    // printf("2)No, just leave it as it is.");
-    // int choice;
-    // scanf("%d", &choice);
-    // while(choice>2||choice<1){
-    //     printf("ENTER A VALID NUMBER ");
-    //     scanf("%d", &choice);
-    // }
-    // if(choice==1){
-    //     map_editor().
-    // }
     
     struct cell* temp=head_of_list1;
     fprintf(save_file_cells,"%d\n", num_players);
@@ -611,7 +599,7 @@ void point_printer(struct cell* head_1, struct cell* head_2){
         sum+=head_1->glucose;
         head_1=head_1->next_cell;
     }
-    printf("%d", sum);
+    printf("%d\n", sum);
     SetConsoleTextAttribute(hConsole, 7);
     if(head_2!=NULL){
         sum=0;
@@ -621,7 +609,7 @@ void point_printer(struct cell* head_1, struct cell* head_2){
             sum+=head_2->glucose;
             head_2=head_2->next_cell;
         }
-        printf("%d", sum);
+        printf("%d\n", sum);
         SetConsoleTextAttribute(hConsole, 7);
     }
     return;

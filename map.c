@@ -153,7 +153,7 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                         }
                         else{
                             SetConsoleTextAttribute(hConsole, colors[4]*17);
-                            printf("NNNN");
+                            printf("NNNNN");
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
@@ -262,46 +262,64 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                     }
                     else if(game_board[i][j]>0){//karbar aval
                         if(map_bin[i][j]==ENERGY){
-                            SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[0]);
                             int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);
-                            if(game_board[i][j]>9){
-                                printf("%d", game_board[i][j]);
+                            if(counter_khat%6==5){
+                                SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[0]);
+                                if(game_board[i][j]>9){
+                                    printf("%d", game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                    print_energy_line(counter_khat, j, energy_left1, 2);
+                                }else{
+                                    printf("%d", game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                    print_energy_line(counter_khat, j, energy_left1, 1);
+                                }
+                            }
+                            else{
                                 SetConsoleTextAttribute(hConsole, colors[1]*16);
-                                print_energy_line(counter_khat, j, energy_left1, 2);
-                            }else{
-                                printf("%d", game_board[i][j]);
-                                SetConsoleTextAttribute(hConsole, colors[1]*16);
-                                print_energy_line(counter_khat, j, energy_left1, 1);
+                                print_energy_line(counter_khat, j, energy_left1, 0);
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
                         }
                         else if(map_bin[i][j]==MITOSIS){
-                            SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[0]);
-                            if(game_board[i][j]>9){
-                                printf("%d", game_board[i][j]);
+                            if(counter_khat%6==5){
+                                SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[0]);
+                                if(game_board[i][j]>9){
+                                    printf("%d", game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                    printf("MMM");
+                                    
+                                }else{
+                                    printf("%d", game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                    printf("MMMM");
+                                }
+                            }
+                            else{
                                 SetConsoleTextAttribute(hConsole, colors[2]*17);
-                                printf("MMM");
-                                
-                            }else{
-                                printf("%d", game_board[i][j]);
-                                SetConsoleTextAttribute(hConsole, colors[2]*17);
-                                printf("MMMM");
+                                printf("MMMMM");
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
                         }
                         else if(map_bin[i][j]==NORMAL){
-                            SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
-                            if(game_board[i][j]>9){
-                                printf("%d", game_board[i][j]);
+                            if(counter_khat%6==5){
+                                SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
+                                if(game_board[i][j]>9){
+                                    printf("%d", game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                    printf("NNN");
+                                    
+                                }else{
+                                    printf("%d", game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                    printf("NNNN");
+                                }
+                            }
+                            else{
                                 SetConsoleTextAttribute(hConsole, colors[4]*17);
-                                printf("NNN");
-                                
-                            }else{
-                                printf("%d", game_board[i][j]);
-                                SetConsoleTextAttribute(hConsole, colors[4]*17);
-                                printf("NNNN");
+                                printf("NNNNN");
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
@@ -310,44 +328,62 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                     else if(game_board[i][j]<0){//karbar dovom
                         if(map_bin[i][j]==ENERGY){
                             int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);
-                            SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[5]);
-                            if((game_board[i][j]*-1)>9){
-                                printf("%d", -1*game_board[i][j]);
+                            if(counter_khat%6==5){
+                                SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[5]);
+                                if((game_board[i][j]*-1)>9){
+                                    printf("%d", -1*game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                    print_energy_line(counter_khat, j, energy_left1, 2);
+                                }else{
+                                    printf("%d", -1*game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                    print_energy_line(counter_khat, j, energy_left1, 1);
+                                }
+                            }
+                            else{
                                 SetConsoleTextAttribute(hConsole, colors[1]*16);
-                                print_energy_line(counter_khat, j, energy_left1, 2);
-                            }else{
-                                printf("%d", -1*game_board[i][j]);
-                                SetConsoleTextAttribute(hConsole, colors[1]*16);
-                                print_energy_line(counter_khat, j, energy_left1, 1);
+                                print_energy_line(counter_khat, j, energy_left1, 0);
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
                         }
                         else if(map_bin[i][j]==MITOSIS){
-                            SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[5]);
-                            if((game_board[i][j]*-1)>9){
-                                printf("%d", -1*game_board[i][j]);
-                                SetConsoleTextAttribute(hConsole, colors[2]*17);
-                                printf("MMM");
+                            if(counter_khat%6==5){
+                                SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[5]);
+                                if((game_board[i][j]*-1)>9){
+                                    printf("%d", -1*game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                    printf("MMM");
+                                }
+                                else{
+                                    printf("%d", -1*game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                    printf("MMMM");
+                                }
                             }
                             else{
-                                printf("%d", -1*game_board[i][j]);
                                 SetConsoleTextAttribute(hConsole, colors[2]*17);
-                                printf("MMMM");
+                                printf("MMMMM");
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
                         }
                         else if(map_bin[i][j]==NORMAL){
-                            SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);
-                            if((game_board[i][j]*-1)>9){
-                                printf("%d", -1*game_board[i][j]);
+                            if(counter_khat%6==5){
+                                SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);
+                                if((game_board[i][j]*-1)>9){
+                                    printf("%d", -1*game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                    printf("NNN");
+                                }else{
+                                    printf("%d", -1*game_board[i][j]);
+                                    SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                    printf("NNNN");
+                                }
+                            }
+                            else{
                                 SetConsoleTextAttribute(hConsole, colors[4]*17);
-                                printf("NNN");
-                            }else{
-                                printf("%d", -1*game_board[i][j]);
-                                SetConsoleTextAttribute(hConsole, colors[4]*17);
-                                printf("NNNN");
+                                printf("NNNNN");
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
@@ -438,7 +474,7 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                             }
                             else{
                                 SetConsoleTextAttribute(hConsole, colors[4]*17);
-                                printf("NNNN");
+                                printf("NNNNN");
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
@@ -501,7 +537,7 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                             }
                             else{
                                 SetConsoleTextAttribute(hConsole, colors[4]*17);
-                                printf("NNNN");
+                                printf("NNNNN");
                             }
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
@@ -563,46 +599,64 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                 }
                 else if(game_board[i][j]>0){//karbar aval
                     if(map_bin[i][j]==ENERGY){
-                        SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[0]);
                         int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);
-                        if(game_board[i][j]>9){
-                            printf("%d", game_board[i][j]);
+                        if(counter_khat%6==5){
+                            SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[0]);
+                            if(game_board[i][j]>9){
+                                printf("%d", game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                print_energy_line(counter_khat, j, energy_left1, 2);
+                            }else{
+                                printf("%d", game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                print_energy_line(counter_khat, j, energy_left1, 1);
+                            }
+                        }
+                        else{
                             SetConsoleTextAttribute(hConsole, colors[1]*16);
-                            print_energy_line(counter_khat, j, energy_left1, 2);
-                        }else{
-                            printf("%d", game_board[i][j]);
-                            SetConsoleTextAttribute(hConsole, colors[1]*16);
-                            print_energy_line(counter_khat, j, energy_left1, 1);
+                            print_energy_line(counter_khat, j, energy_left1, 0);
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
                     else if(map_bin[i][j]==MITOSIS){
-                        SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[0]);
-                        if(game_board[i][j]>9){
-                            printf("%d", game_board[i][j]);
+                        if(counter_khat%6==5){
+                            SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[0]);
+                            if(game_board[i][j]>9){
+                                printf("%d", game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                printf("MMM");
+                                
+                            }else{
+                                printf("%d", game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                printf("MMMM");
+                            }
+                        }
+                        else{
                             SetConsoleTextAttribute(hConsole, colors[2]*17);
-                            printf("MMM");
-                            
-                        }else{
-                            printf("%d", game_board[i][j]);
-                            SetConsoleTextAttribute(hConsole, colors[2]*17);
-                            printf("MMMM");
+                            printf("MMMMM");
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
                     else if(map_bin[i][j]==NORMAL){
-                        SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
-                        if(game_board[i][j]>9){
-                            printf("%d", game_board[i][j]);
+                        if(counter_khat%6==5){
+                            SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
+                            if(game_board[i][j]>9){
+                                printf("%d", game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                printf("NNN");
+                                
+                            }else{
+                                printf("%d", game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                printf("NNNN");
+                            }
+                        }
+                        else{
                             SetConsoleTextAttribute(hConsole, colors[4]*17);
-                            printf("NNN");
-                            
-                        }else{
-                            printf("%d", game_board[i][j]);
-                            SetConsoleTextAttribute(hConsole, colors[4]*17);
-                            printf("NNNN");
+                            printf("NNNNN");
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
@@ -611,44 +665,62 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                 else if(game_board[i][j]<0){//karbar dovom
                     if(map_bin[i][j]==ENERGY){
                         int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);
-                        SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[5]);
-                        if((game_board[i][j]*-1)>9){
-                            printf("%d", -1*game_board[i][j]);
+                        if(counter_khat%6==5){
+                            SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[5]);
+                            if((game_board[i][j]*-1)>9){
+                                printf("%d", -1*game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                print_energy_line(counter_khat, j, energy_left1, 2);
+                            }else{
+                                printf("%d", -1*game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[1]*16);
+                                print_energy_line(counter_khat, j, energy_left1, 1);
+                            }
+                        }
+                        else{
                             SetConsoleTextAttribute(hConsole, colors[1]*16);
-                            print_energy_line(counter_khat, j, energy_left1, 2);
-                        }else{
-                            printf("%d", -1*game_board[i][j]);
-                            SetConsoleTextAttribute(hConsole, colors[1]*16);
-                            print_energy_line(counter_khat, j, energy_left1, 1);
+                            print_energy_line(counter_khat, j, energy_left1, 0);
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
                     else if(map_bin[i][j]==MITOSIS){
-                        SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[5]);
-                        if((game_board[i][j]*-1)>9){
-                            printf("%d", -1*game_board[i][j]);
-                            SetConsoleTextAttribute(hConsole, colors[2]*17);
-                            printf("MMM");
+                        if(counter_khat%6==5){
+                            SetConsoleTextAttribute(hConsole, (colors[2]*16)+colors[5]);
+                            if((game_board[i][j]*-1)>9){
+                                printf("%d", -1*game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                printf("MMM");
+                            }
+                            else{
+                                printf("%d", -1*game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[2]*17);
+                                printf("MMMM");
+                            }
                         }
                         else{
-                            printf("%d", -1*game_board[i][j]);
                             SetConsoleTextAttribute(hConsole, colors[2]*17);
-                            printf("MMMM");
+                            printf("MMMMM");
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
                     else if(map_bin[i][j]==NORMAL){
-                        SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);
-                        if((game_board[i][j]*-1)>9){
-                            printf("%d", -1*game_board[i][j]);
+                        if(counter_khat%6==5){
+                            SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);
+                            if((game_board[i][j]*-1)>9){
+                                printf("%d", -1*game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                printf("NNN");
+                            }else{
+                                printf("%d", -1*game_board[i][j]);
+                                SetConsoleTextAttribute(hConsole, colors[4]*17);
+                                printf("NNNN");
+                            }
+                        }
+                        else{
                             SetConsoleTextAttribute(hConsole, colors[4]*17);
-                            printf("NNN");
-                        }else{
-                            printf("%d", -1*game_board[i][j]);
-                            SetConsoleTextAttribute(hConsole, colors[4]*17);
-                            printf("NNNN");
+                            printf("NNNNN");
                         }
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");

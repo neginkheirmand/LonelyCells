@@ -776,12 +776,12 @@ int main(){
                 num_cells1=num_cells(num_forbiden_blocks, num_cells1, num_cells2, size_game);
                 int choose_name=choseName();//agar 1 bale
                 millisleep(1000);
-                system("cls");
+                // system("cls");
                 Head_Player_one=create_n_cells(num_cells1, choose_name, 1, size_game, map_bin, game_board);
             }
             print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
             millisleep(1000);
-            system("cls");
+            // system("cls");
             print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
             while(2>1){
                 printf("\nPlease choose one of your cells:\n");
@@ -790,7 +790,7 @@ int main(){
                 scanf("%d", &choosen_cell);
                 play_menu(choosen_cell, &Head_Player_one, NULL, 1, 1, size_game, map_bin, game_board, num_boost_blocks, boostup_blocks);//1 chon player one bazi mikone
                 millisleep(1000);
-                system("cls");
+                // system("cls");
                 print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
             }
         }
@@ -815,7 +815,7 @@ int main(){
         num_cells2=num_cells(num_forbiden_blocks, num_cells1, num_cells2, size_game);
         int choose_name2=choseName();//agar 1 bale
         Head_Player_two=create_n_cells(num_cells2, choose_name2, 2, size_game, map_bin, game_board);
-        system("cls");
+        // system("cls");
         print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
         // millisleep(1000);
         // system("cls");
@@ -831,7 +831,7 @@ int main(){
             int choosen_cell;
             scanf("%d", &choosen_cell);
             play_menu(choosen_cell, &Head_Player_one, &Head_Player_two, 1, 2, size_game, map_bin, game_board, num_boost_blocks, boostup_blocks);//1 chon player one bazi mikone
-            system("cls");
+            // system("cls");
             print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
             millisleep(500);
             SetConsoleTextAttribute(hConsole, colors[5]);
@@ -842,7 +842,7 @@ int main(){
             scanf("%d", &choosen_cell);
             //inja farz mishavad ke karbar adad dorost vared karde.
             play_menu(choosen_cell, &Head_Player_one, &Head_Player_two, 2, 2, size_game, map_bin, game_board, num_boost_blocks, boostup_blocks);
-            system("cls");
+            // system("cls");
             print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
             millisleep(1000);
         }

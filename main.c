@@ -75,11 +75,11 @@ int first_menu(){//menu aval bazi ro neshun mide va khurujish gharare ke entekha
     HANDLE hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, 4);
+    printf(" if you changed the map in the step before you cannot choose the next option\n");
     printf("[1]");
     SetConsoleTextAttribute(hConsole, 9);
     printf("Load \n");
     SetConsoleTextAttribute(hConsole, 4);
-    printf(" if you changed the map in the step before you cannot choose the next option\n");
     printf("[2]");
     SetConsoleTextAttribute(hConsole, 9);
     printf("New single player game \n");
@@ -732,9 +732,13 @@ int main(){
     int map=0;
     printf("1)i want my own map\n2) by-default\n");
     scanf("%d", &map);
+    while(map>2||map<1){
+        printf("Please enter a valid number\n");
+        scanf("%d", &map);
+    }
     if(map==1){
         map_editor( &map_bin, &size_game, &num_boost_blocks, &num_forbiden_blocks, &game_board, &boostup_blocks);
-    }else{
+    }else if(map==2){
         map_handler(&map_bin, &num_forbiden_blocks, &num_boost_blocks, &game_board, &boostup_blocks, &size_game);
     }
 

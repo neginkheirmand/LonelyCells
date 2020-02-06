@@ -146,7 +146,7 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                                 printf("NNN");
                                 
                             }else{
-                                printf("%d ", game_board[i][j]);
+                                printf("%d", game_board[i][j]);
                                 SetConsoleTextAttribute(hConsole, colors[4]*17);
                                 printf("NNNN");
                             }
@@ -233,7 +233,8 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                     
                     if(game_board[i][j]==0){
                         if(map_bin[i][j]==ENERGY){
-                            int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);                        
+                            int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);  
+                            // printf("energy left is%d", energy_left1);                      
                             SetConsoleTextAttribute(hConsole, colors[1]*16);
                             //haminja rang printf ro tanzim mikonim
                             print_energy_line(counter_khat, j, energy_left1, 0);
@@ -263,6 +264,7 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                     else if(game_board[i][j]>0){//karbar aval
                         if(map_bin[i][j]==ENERGY){
                             int energy_left1=energy_left(i, j, num_boostup_blocks, boostup_blocks);
+                            // printf("energy left is%d\n", energy_left1);                      
                             if(counter_khat%6==5){
                                 SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[0]);
                                 if(game_board[i][j]>9){
@@ -424,16 +426,16 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                                 SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[0]);
                                 if(game_board[i+1][j]>9){
                                     printf("%d", game_board[i+1][j]);
-                                    SetConsoleTextAttribute(hConsole, colors[1]*17);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
                                     print_energy_line(counter_khat, j, energy_left1, 2);
                                 }else{
                                     printf("%d", game_board[i+1][j]);
-                                    SetConsoleTextAttribute(hConsole, colors[1]*17);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
                                     print_energy_line(counter_khat, j, energy_left1, 1);
                                 }
                             }
                             else{
-                                SetConsoleTextAttribute(hConsole, colors[1]*17);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
                                 print_energy_line(counter_khat, j, energy_left1, 0);
                             }
                             SetConsoleTextAttribute(hConsole, 7);
@@ -486,16 +488,16 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                                 SetConsoleTextAttribute(hConsole, (colors[1]*16)+colors[5]);
                                 if((game_board[i+1][j]*-1)>9){
                                     printf("%d", -1*game_board[i+1][j]);
-                                    SetConsoleTextAttribute(hConsole, colors[1]*17);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
                                     print_energy_line(counter_khat, j, energy_left1, 2);
                                 }else{
                                     printf("%d", -1*game_board[i+1][j]);
-                                    SetConsoleTextAttribute(hConsole, colors[1]*17);
+                                    SetConsoleTextAttribute(hConsole, colors[1]*16);
                                     print_energy_line(counter_khat, j, energy_left1, 1);
                                 }
                             }
                             else{
-                                SetConsoleTextAttribute(hConsole, colors[1]*17);
+                                SetConsoleTextAttribute(hConsole, colors[1]*16);
                                 print_energy_line(counter_khat, j, energy_left1, 0);
                             }
                             SetConsoleTextAttribute(hConsole, 7);

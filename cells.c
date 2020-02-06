@@ -456,7 +456,7 @@ void refresh_indexes(struct cell* head){
 void Split(int index_cell, struct cell** head_of_list, int player, int** map_bin, int size_game, int**game_board){
 //bayad haminja game_board ro ham refresh koni
 //sharayet split: tuye khune mitosis, energy kafi, khunehaye baghali hadaghal yekishun ja bashe
-printf("hello1\n");
+// printf("hello1\n");
     struct cell* temp=*head_of_list;
     while(temp!=NULL){
         if(temp->index==index_cell){
@@ -464,29 +464,29 @@ printf("hello1\n");
         }
         temp=temp->next_cell;
     }
-printf("hello2\n");
+// printf("hello2\n");
 
     if(temp==NULL){
         printf("wait whaattttt!!\n");
         exit(0);
     }
-        printf("right here1\n");
+        // printf("right here1\n");
     if(temp->index==index_cell){
         int x=temp->x;
         int y=temp->y;
-        printf("right here2\n");
+        // printf("right here2\n");
         if(temp->glucose>=80 && map_bin[y][x]==MITOSIS){//ta inja check karDm ke energu kafi ro dashte bashe va tuye khuneye mitosis bashe
         //hala bayad check konim ke aslan khuneye dovomi hast ke beshe tush cell dovom ro berizim
             int blank_block=0;
             int x_2,y_2;
-            printf("right here3\n");
+            // printf("right here3\n");
             if(x%2==1){
                 for(int i=y-1; i<=y; i++){
                     if(i>=0){
                         for(int j=x-1; j<=x+1 && j<size_game; j++){
                             if(j>=0){
-                                if(game_board[i][j]==0){
-                                    printf("right here4\n");
+                                if(game_board[i][j]==0&&map_bin[i][j]!=FORBIDDEN){
+                                    // printf("right here4\n");
                                     x_2=j;
                                     y_2=i;
                                     blank_block=1;
@@ -503,19 +503,19 @@ printf("hello2\n");
                         continue;
                     }
                 }
-                printf("right here5\n");
-                if(game_board[y+1][x]==0&&y+1<size_game){//harekat 1 ro ham check mikonim
+                // printf("right here5\n");
+                if(game_board[y+1][x]==0&&y+1<size_game&&map_bin[y+1][x]!=FORBIDDEN){//harekat 1 ro ham check mikonim
                     blank_block=1;
                     x_2=x;
                     y_2=y+1;
                 }
             }
             else if(x%2==0){
-                printf("right here6\n");
+                // printf("right here6\n");
                 for(int i=y; i<=y+1&&i<size_game; i++){
                     for(int j=x-1; j<=x+1 && j<size_game; j++){
                         if(j>=0){
-                            if(game_board[i][j]==0){
+                            if(game_board[i][j]==0&&map_bin[i][j]!=FORBIDDEN){
                                 x_2=j;
                                 y_2=i;
                                 blank_block=1;
@@ -529,56 +529,56 @@ printf("hello2\n");
                         break;
                     }
                 }
-                printf("right here7\n");
-                if(game_board[y-1][x]==0&&y>0){//harekat 1 ro ham check mikonim
+                // printf("right her?e7\n");
+                if(game_board[y-1][x]==0&&y>0&&map_bin[y-1][x]!=FORBIDDEN){//harekat 1 ro ham check mikonim
                     blank_block=1;
                     x_2=x;
                     y_2=y-1;
                 }
             }
-            printf("right here8\n");
+            // printf("right here8\n");
             if(blank_block==0){
-                printf("right here9\n");
+                // printf("right here9\n");
                 printf("there is not space for the child cell\n");
                 return;
             }
             //inja bayad ye cell jadid besazi.
             //yani bayad ghablie ro delet koni, khodesho va bachasho bezari tahe list va index hameye cell haye tuye jadval ro update koni 
-            printf("right here10\n");
+            // printf("right here10\n");
             char* name1 = temp->name;
-            printf("right here11\n");
+            // printf("right here11\n");
             delete(head_of_list, temp);
-            printf("right here12\n");
+            // printf("right here12\n");
             temp=*head_of_list;//alan temp be avalin khuneye liste jadid eshare mikone
             int i;
             for(i=1; temp->next_cell!=NULL; i++){
                 temp=temp->next_cell;
             }
-            printf("right here13\n");
+            // printf("right here13\n");
             i++;
             temp->next_cell=mitosis();
             temp=temp->next_cell;
             temp->x=x;
             temp->y=y;
             temp->name=name1;
-            printf("right here14\n");
+            // printf("right here14\n");
             // temp->name="eyba";
-            printf("right here15\n");
+            // printf("right here15\n");
             refresh_indexes(*head_of_list);
-            printf("right here15\n");
+            // printf("right here15\n");
             temp->next_cell=mitosis();
-            printf("right here16\n");
+            // printf("right here16\n");
             temp=temp->next_cell;
             temp->x=x_2;
             temp->y=y_2;
             temp->name=give_name_rand(size_base);
             refresh_indexes(*head_of_list);
-            printf("i am the bug in split:D\n");
+            // printf("i am the bug in split:D\n");
 
             return;
             // mitosis
         }else{
-            printf("right here17\n");
+            // printf("right here17\n");
             printf(" cannot split the cell\n");
             return;
         }

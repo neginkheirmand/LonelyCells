@@ -137,6 +137,9 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
+                    // else if(map_bin[i][j]==FORBIDDEN){
+                        // printf("i:%d j:%d avatar:%d",i, j, game_board[i][j] );
+                    // }
                     else if(map_bin[i][j]==NORMAL){
                         if(counter_khat%6==1){
                             SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
@@ -201,6 +204,11 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
+                    
+                    // else if(map_bin[i][j]==FORBIDDEN){
+                    //     printf("what 1");
+                    // }
+
                     else if(map_bin[i][j]==NORMAL){
                         if(counter_khat%6==1){
                             SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);
@@ -461,6 +469,9 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                             SetConsoleTextAttribute(hConsole, 7);
                             printf(" ");
                         }
+                        // else if(map_bin[i+1][j]==FORBIDDEN){
+                        //     printf("what1");
+                        // }
                         else if(map_bin[i+1][j]==NORMAL){
                             if(counter_khat%6==5){
                                 SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
@@ -524,6 +535,10 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                             printf(" ");
                         }
                         
+                        // else if(map_bin[i+1][j]==FORBIDDEN){
+                        //     printf("what1");
+                        // }
+
                         else if(map_bin[i+1][j]==NORMAL){
                             if(counter_khat%6==5){
                                 SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);
@@ -642,6 +657,9 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
+                    // else if(map_bin[i][j]==FORBIDDEN){
+                    //     printf("stil what1");
+                    // }
                     else if(map_bin[i][j]==NORMAL){
                         if(counter_khat%6==5){
                             SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[0]);
@@ -707,6 +725,11 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                         SetConsoleTextAttribute(hConsole, 7);
                         printf(" ");
                     }
+                    
+                    // else if(map_bin[i][j]==FORBIDDEN){
+                    //     printf("stil what1");
+                    // }
+
                     else if(map_bin[i][j]==NORMAL){
                         if(counter_khat%6==5){
                             SetConsoleTextAttribute(hConsole, (colors[4]*16)+colors[5]);

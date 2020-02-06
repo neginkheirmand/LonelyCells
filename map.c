@@ -567,18 +567,20 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
         if(counter_khat%6==0){
             i--;
         }
+        printf("this is counter_khat:%d\n i=%d, j=%d\n", counter_khat, i, j);
         SetConsoleTextAttribute(hConsole, 7);
         printf("\n");
         SetConsoleTextAttribute(hConsole, 7);
         if(i<0){
-            // printf("this is counter_khat:%d\n i=%d, j=%d\n", counter_khat, i, j);
+            printf("this is counter_khat:%d\n i=%d, j=%d\n", counter_khat, i, j);
             break;
         }
     }
     SetConsoleTextAttribute(hConsole, 7);
     while(counter_khat%6!=2){
         i=0;
-        for(int j=0; j<size_game; j++){
+        int j;
+        for(j=0; j<size_game; j++){
             if(j%2==0){
                 SetConsoleTextAttribute(hConsole, 7);
                 printf("      ");
@@ -757,6 +759,7 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
             }
         }
         SetConsoleTextAttribute(hConsole, 7);
+        printf("this is counter_khat:%d\n i=%d, j=%d\n", counter_khat, i, j);
         printf("\n");
         counter_khat++;
     }

@@ -14,23 +14,21 @@ void print_block_energies(int** boostup_blocks, int num_boostup_blocks){
 
 
 void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_boostup_blocks, int** boostup_blocks){
-    // printf("alan tuye print()\n");
-    // for(int i=0; i<6; i++){
-    //     printf("colors[%d] is : %d\n", i, colors[i]);
-    // }
-//_______________________
-//     hanuz ghesmate emtiazaye khuneha va cellha malum nist
-//dar zemn ye bar diagm checck kon ke yevaght map az ruye mokhtasat haye jadid kar kones
-//_______________________
     HANDLE hConsole;
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    for(int i=size_game-1; i>=0; i--){
+    int counter_khat=1;
+    for(int i=size_game-1; i>=0; i--, counter_khat++){
         for(int j=0; j<size_game; j++){
-            if(i==size_game-1&&j%2==1){
-                printf("   ");
-                continue;
-            }
             if(j%2==0){
+                if(counter_khat%3==0){
+                    SetConsoleTextAttribute(hConsole, 7);
+                    printf("   ");
+                    SetConsoleTextAttribute(hConsole, 7);
+                    if(j==size_game-1){
+                        counter_khat=1;
+                    }
+                    continue;
+                }
                 if(game_board[i][j]==0){
                     if(map_bin[i][j]==ENERGY){
                         int energy_left;
@@ -159,7 +157,8 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
             }
             else if(j%2==1){
                 if(i==size_game-1){
-                    printf("    ");
+                    printf("   ");
+                    continue;
                 }
                 if(game_board[i+1][j]==0){
                     if(map_bin[i+1][j]==ENERGY){
@@ -265,12 +264,18 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                         printf(" ");
                     }
                 }
-                printf("\n");
             }
         }
         printf("\n");
+        counter_khat++;
         //khat dovom
         for(int j=0; j<size_game; j++){
+            if(j%2==1 && counter_khat%3==1){
+                SetConsoleTextAttribute(hConsole, 7);
+                printf("   ");
+                // continue;
+                SetConsoleTextAttribute(hConsole, 7);
+            }
             if(map_bin[i][j]==ENERGY){
                 if(game_board[i][j]==0){
                    int energy_left;
@@ -359,9 +364,6 @@ void print(int size_game, int**map_bin, int**game_board, int colors[6], int num_
                     }
                     SetConsoleTextAttribute(hConsole, 7);
                     printf(" ");
-                }
-                if(j%2==0){
-                    printf("\n");
                 }
             }
             

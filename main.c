@@ -539,28 +539,38 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
 }
 
 void Save(int num_players, struct cell* head_of_list1, struct cell* head_of_list2, int size_game, int num_boost_blocks, int** boostup_blocks){
-    FILE* save_file_cells=fopen("save_cells.txt", "w");
-    if(save_file_cells==NULL){
-        printf("cannot save it\n");
+    printf("its in the function\n");
+    FILE* save_file_cells=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_cells.txt", "w");
+    FILE* save_file_naghshe=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_map_points.txt", "w");
+    if(save_file_naghshe==NULL||save_file_cells==NULL){
+        printf("cannot save the file\n");
         return;
     }
-    
+    printf("was able to open the files\n");
     struct cell* temp=head_of_list1;
+    printf("started with setting up the temp\n");
+    if(temp==NULL){
+        printf("temp was null\n");
+    }
     fprintf(save_file_cells,"%d\n", num_players);
     ///
     fprintf(save_file_cells,"%d\n", 1);
+    printf("is writing the cells of player one\n");
     int num_cells;
     for(num_cells=1; temp->next_cell!=NULL; num_cells++){
         temp=temp->next_cell;
     }//check shavad
     temp=head_of_list1;
     fprintf(save_file_cells,"%d\n", num_cells);
+    printf("just wrote the number of cells of player one\n");
     while(temp!=NULL){
         int size_name=strlen(temp->name);
         fprintf(save_file_cells,"%d-%d-%d-%d-%s\n", temp->x, temp->y, temp->glucose, size_name, temp->name);
         temp=temp->next_cell;
     }
+    printf("just wrote everyone of the cells in the list of player one in the save.txt\n");
     if(num_players==2){
+        printf("tryng to the same thing for the player two\n");
         temp=head_of_list2;
         fprintf(save_file_cells,"%d\n", 2);
         for(num_cells=1; temp->next_cell!=NULL; num_cells++){
@@ -575,18 +585,18 @@ void Save(int num_players, struct cell* head_of_list1, struct cell* head_of_list
             fprintf(save_file_cells,"%d-%d-%d-%d-%s\n", temp->x, temp->y, temp->glucose,size_name, temp->name);
             temp=temp->next_cell;
         }   
+        printf("did the same things for player two\n");
     }
     fclose(save_file_cells);
-    FILE* save_file_naghshe=fopen("save_map_points.txt", "w");
-    if(save_file_naghshe==NULL){
-        printf("cannot save the file\n");
-        return;
-    }
+    printf("saved the cells\n");
     fprintf(save_file_naghshe,"%d\n",num_boost_blocks);
+    printf("is writing the blocks of the map in map.txt\n");
     for(int i=0; i<num_boost_blocks; i++){
         fprintf(save_file_naghshe,"%d-%d-%d\n",boostup_blocks[i][0], boostup_blocks[i][1], boostup_blocks[i][2]);//x-y-energy  
     }
+    printf("end of save()\n");
     fclose(save_file_naghshe);
+    return;
 }
 
 void point_printer(struct cell* head_1, struct cell* head_2){

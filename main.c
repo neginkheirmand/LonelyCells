@@ -447,29 +447,40 @@ void map_editor(int ***map_bin, int* size_game,int* num_boost_blocks, int* num_f
 
 int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_forbiden_blocks, int* num_boost_blocks, int ***game_board, int ***boostup_blocks, int* size_game){
     //if returns 0 wasnt able to load it, else gives the number of players in the game
-    FILE* save_file_cells=fopen("save_cells.txt", "r");
+    printf("its in the Load() function\n");
+    FILE* save_file_cells=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_cells.txt", "r");
+    printf("was able to open the save_cells.txt file\n");
     if(save_file_cells==NULL){
         printf("Nothing was saved in the games before\n");
         return 0;
     }   
+    printf("starting to read from the file \n");
     int num_players;
     fscanf(save_file_cells, "%d\n", &num_players);
+    printf("1");
     fscanf(save_file_cells, "1\n");
     int num_cells1;
+    printf("2");
 
     fscanf(save_file_cells, "%d\n", &num_cells1);
     *head_1=mitosis();
+    printf("1");
+    
     struct cell* temp=*head_1;
     int size_name;
     fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
+    printf("3");
     char* name1=malloc(sizeof(char)*size_name+3);
     fgets(name1, size_name+3, save_file_cells);
+    printf("1");
     name1[size_name]='\0';
     temp->name=name1;
+    printf("4");
     temp->index=1;
     for(int i=2; i<=num_cells1; i++){
         temp->next_cell=mitosis();
         temp=temp->next_cell;
+    printf("1");
         fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
         name1=malloc(sizeof(char)*size_name+3);
         fgets(name1,size_name+3, save_file_cells);
@@ -477,23 +488,29 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
         temp->name=name1;
         temp->index=i;
     }
+    printf("6");
     if(num_players==2){
+        printf("for the second plyaer\n");
         fscanf(save_file_cells, "2\n");
         int num_cells2;
         fscanf(save_file_cells, "%d\n", &num_cells2);
+    printf("3");
         *head_2=mitosis();
+    printf("4");
         temp=*head_2;
         fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
+    printf("3");
         name1=malloc(sizeof(char)*size_name+3);
         fgets(name1, size_name+3, save_file_cells);
         name1[size_name]='\0';
         temp->name=name1;
+    printf("2");
         temp->index=1;
-        for(int i=2; i<=num_cells1; i++){
+        for(int i=2; i<=num_cells2; i++){
             temp->next_cell=mitosis();
             temp=temp->next_cell;
-            name1=malloc(sizeof(char)*size_name+3);
             fscanf(save_file_cells,"%d-%d-%d-%d-", &temp->x, &temp->y, &temp->glucose, &size_name);
+            name1=malloc(sizeof(char)*size_name+3);
             fgets(name1, size_name+3, save_file_cells);
             name1[size_name]='\0';
             temp->name=name1;
@@ -503,7 +520,11 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
     }
     //ta inja ma etelaat bazikon haro bazyabi karDm
     //alan bayad etelaat naghshe ro bayabi konim
+    fclose(save_file_cells);
+    printf("etelaat bazikon hato khunDm\n");
+    printf("mire ke shuru kone be khundn akharin naghsheye save shode\n");
     map_handler(map_bin,  num_forbiden_blocks,  num_boost_blocks, game_board, boostup_blocks, size_game);
+    printf("akharin naghsheye save shode ro mikhune\n");
     temp=*head_1;
     while(temp!=NULL){
         (*game_board)[temp->y][temp->x]=temp->index;
@@ -517,7 +538,8 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
             temp=temp->next_cell;
         }
     }
-    FILE* save_file_naghshe=fopen("save_map_points.txt", "r");
+    printf("tryng to read the place of blocks and their energy\n");
+    FILE* save_file_naghshe=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_map_points.txt", "r");
     if(save_file_naghshe==NULL){
         printf("there is an error");
         exit(0);
@@ -533,7 +555,6 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
         fscanf(save_file_naghshe,"%d-%d-%d\n",&((*boostup_blocks)[i][0]), &((*boostup_blocks)[i][1]), &((*boostup_blocks)[i][2]));//x-y-energy  
     }
     fclose(save_file_naghshe);
-    fclose(save_file_cells);
     return num_players;
     
 }
@@ -588,6 +609,7 @@ void Save(int num_players, struct cell* head_of_list1, struct cell* head_of_list
         printf("did the same things for player two\n");
     }
     fclose(save_file_cells);
+    
     printf("saved the cells\n");
     fprintf(save_file_naghshe,"%d\n",num_boost_blocks);
     printf("is writing the blocks of the map in map.txt\n");

@@ -70,35 +70,60 @@ void map_handler(int***map_bin, int* num_forbiden_blocks, int* num_boost_blocks,
 }//debuged but we cant put it in other file.c god knows why
 
 
-int first_menu(){//menu aval bazi ro neshun mide va khurujish gharare ke entekhab karbar bashe
-
+int first_menu(int previous_choice){//menu aval bazi ro neshun mide va khurujish gharare ke entekhab karbar bashe
+//if the previous choice was to create a new map you cannot Load the game saved since the maps will be diffrent
+    if(previous_choice==1){//meanning that he chosed to change the map
     HANDLE hConsole;
-    hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, 4);
-    printf(" if you changed the map in the step before you cannot choose the next option\n");
-    printf("[1]");
-    SetConsoleTextAttribute(hConsole, 9);
-    printf("Load \n");
-    SetConsoleTextAttribute(hConsole, 4);
-    printf("[2]");
-    SetConsoleTextAttribute(hConsole, 9);
-    printf("New single player game \n");
-    SetConsoleTextAttribute(hConsole, 4);
-    printf("[3]");
-    SetConsoleTextAttribute(hConsole, 9);
-    printf("New Multiplayer game \n");
-    SetConsoleTextAttribute(hConsole, 4);
-    printf("[4]");
-    SetConsoleTextAttribute(hConsole, 9);
-    printf("Exit\n");
-    SetConsoleTextAttribute(hConsole, 7);
-    int input;
-    scanf("%d", &input);
-    while(input>4||input<1){
-        printf("Please enter a valid number\n");
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[1]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("New single player game \n");
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[2]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("New Multiplayer game \n");
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[3]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("Exit\n");
+        SetConsoleTextAttribute(hConsole, 7);
+        int input;
         scanf("%d", &input);
+        while(input>3||input<1){
+            printf("Please enter a valid number\n");
+            scanf("%d", &input);
+        }
+        return (input+1);
     }
-    return input;
+    else{
+        HANDLE hConsole;
+        hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[1]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("Load \n");
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[2]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("New single player game \n");
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[3]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("New Multiplayer game \n");
+        SetConsoleTextAttribute(hConsole, 4);
+        printf("[4]");
+        SetConsoleTextAttribute(hConsole, 9);
+        printf("Exit\n");
+        SetConsoleTextAttribute(hConsole, 7);
+        int input;
+        scanf("%d", &input);
+        while(input>4||input<1){
+            printf("Please enter a valid number\n");
+            scanf("%d", &input);
+        }
+        return input;
+    }
 }//debuged
 
 int sec_menu1(){
@@ -761,7 +786,7 @@ int main(){
     //[3]=forbidden blocks raw
     //[4]=normal blocks raw
     //[5]=player2
-
+    printf("Please choose knowing that if you change the map you cannnot play saved games anymore\n");
     printf("Do you want to play with your own map or the by-default one?\n");
     int map=0;
     printf("1)i want my own map\n2) by-default\n");
@@ -774,6 +799,7 @@ int main(){
         map_editor( &map_bin, &size_game, &num_boost_blocks, &num_forbiden_blocks, &game_board, &boostup_blocks);
     }else if(map==2){
         map_handler(&map_bin, &num_forbiden_blocks, &num_boost_blocks, &game_board, &boostup_blocks, &size_game);
+        //az map.bin mikhunim
     }
 
     if(size_game*size_game==num_forbiden_blocks){
@@ -782,15 +808,17 @@ int main(){
     }
 
 
-    int choice_first_menu=first_menu();
+    int choice_first_menu=first_menu(map);
     // print_block_energies(boostup_blocks, num_boost_blocks);
     struct cell* Head_Player_one=NULL;
     struct cell* Head_Player_two=NULL;
     int loaded=0;
     if(choice_first_menu==1){
         loaded=1;
-        printf("if the last saved game was one of two players, this one will become one too.\nsame case for single player game\n");
+        // printf("if the last saved game was one of two players, this one will become one too.\nsame case for single player game\n");
         choice_first_menu=1+Load(&Head_Player_one, &Head_Player_two, &map_bin, &num_forbiden_blocks, &num_boost_blocks, &game_board, &boostup_blocks, &size_game);
+        //Load() gharare ke num_players ro pas befreste
+        //soal agar ke ba pc bazi mikard chi??
     }
 
     if(choice_first_menu==2){

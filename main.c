@@ -5,7 +5,7 @@
 #include <string.h>
 #include "cells.h"
 #include "map.h"
-
+#include <unistd.h>
 
 void map_handler(int***map_bin, int* num_forbiden_blocks, int* num_boost_blocks, int ***game_board, int ***boostup_blocks, int* size_game){
     FILE* fi=fopen("map.bin", "rb");
@@ -473,9 +473,15 @@ void map_editor(int ***map_bin, int* size_game,int* num_boost_blocks, int* num_f
 int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_forbiden_blocks, int* num_boost_blocks, int ***game_board, int ***boostup_blocks, int* size_game){
     //if returns 0 wasnt able to load it, else gives the number of players in the game
 
-    
-    // printf("its in the Load() function\n");
-    FILE* save_file_cells=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_cells.txt", "r");
+    char cwd[1000];
+   if (getcwd(cwd, sizeof(cwd)) != NULL) {
+       strcat(cwd, "\\save_cells.txt");
+   }else{
+        printf("can't load\n");
+        return 0;
+   }
+    // FILE* save_file_cells=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_cells.txt", "r");
+    FILE* save_file_cells=fopen(cwd, "r");
     // printf("was able to open the save_cells.txt file\n");
     if(save_file_cells==NULL){
         printf("Nothing was saved in the games before\n");
@@ -566,7 +572,14 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
         }
     }
     // printf("tryng to read the place of blocks and their energy\n");
-    FILE* save_file_naghshe=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_map_points.txt", "r");
+    char cwd1[1000];
+    if (getcwd(cwd1, sizeof(cwd1)) != NULL) {
+        strcat(cwd1,"\\save_map_points.txt");
+    }else{
+        printf("there is an error reading the saved file of map\n");
+        exit(0);
+    }
+    FILE* save_file_naghshe=fopen(cwd1, "r");
     if(save_file_naghshe==NULL){
         printf("there is an error reading the saved file of map\n");
         exit(0);
@@ -588,8 +601,25 @@ int Load(struct cell** head_1, struct cell** head_2, int***map_bin, int* num_for
 
 void Save(int num_players, struct cell* head_of_list1, struct cell* head_of_list2, int size_game, int num_boost_blocks, int** boostup_blocks){
     // printf("its in the function\n");
-    FILE* save_file_cells=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_cells.txt", "w");
-    FILE* save_file_naghshe=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_map_points.txt", "w");
+    // FILE* save_file_cells=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_cells.txt", "w");
+    // FILE* save_file_naghshe=fopen("C:\\Users\\venus\\Desktop\\proje_payani\\yerune\\save_map_points.txt", "w");
+    
+
+
+    //will save and read from the current directory
+    char cwd1[1000];
+    char cwd2[1000];
+    FILE* save_file_cells;
+    FILE* save_file_naghshe;
+    if (getcwd(cwd1, sizeof(cwd1)) != NULL && getcwd(cwd2, sizeof(cwd2)) != NULL) {  
+
+        save_file_cells=fopen(strcat(cwd1, "\\save_cells.txt"), "w");
+
+        save_file_naghshe=fopen(strcat(cwd2, "\\save_map_points.txt"), "w");
+   }else{
+        printf("cannot save the file\n");
+        return;
+   }
     if(save_file_naghshe==NULL||save_file_cells==NULL){
         printf("cannot save the file\n");
         return;
@@ -848,10 +878,8 @@ int main(){
                 print(size_game, map_bin, game_board, colors, num_boost_blocks, boostup_blocks);
             }
         }
-        else if(sec_choice==2){//smart program XD
+        else if(sec_choice==2){//smart program 
             // colors[5]=0;//bayad handle koni rang taraf moghabel
-
-            printf("in ghesmat hanuz dayer nist :D\n");
         }
     }
 
